@@ -27,17 +27,25 @@ Thermostat.prototype.isPowerSavingModeOn = function(){
   return this._powerSavingMode
 }
 
-Thermostat.prototype.turnPowerSaveModeOff = function(){
+Thermostat.prototype._turnPowerSaveModeOff = function(){
   this._maximumTemperature = 32;
   return this._powerSavingMode = false;
 }
 
-Thermostat.prototype.turnPowerSaveModeOn = function(){
+Thermostat.prototype._turnPowerSaveModeOn = function(){
   this._maximumTemperature = 25;
   if (this.currentTemperature() > this._maximumTemperature) {
     this._temperature = this._maximumTemperature
   }
   return this._powerSavingMode = true;
+}
+
+Thermostat.prototype.togglePSM = function(){
+  if (this.isPowerSavingModeOn()) {
+    this._turnPowerSaveModeOff();
+  } else {
+    this._turnPowerSaveModeOn();
+  }
 }
 
 Thermostat.prototype.reset = function(){

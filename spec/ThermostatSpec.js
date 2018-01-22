@@ -37,7 +37,7 @@ describe('Thermostat', function(){
     })
 
     it('has a maximum temperature of 32 when PSM is off', function(){
-      thermostat.turnPowerSaveModeOff();
+      thermostat.togglePSM();
       for(let i=0;i<13;i++){
         thermostat.up()
       }
@@ -59,26 +59,28 @@ describe('Thermostat', function(){
     })
   })
 
-  describe('#turnPowerSaveModeOff', function(){
+  describe('#togglePSM', function(){
     it('sets PSM to false', function(){
-      thermostat.turnPowerSaveModeOff();
+      thermostat.togglePSM();
       expect(thermostat.isPowerSavingModeOn()).toEqual(false)
+    })
+
+    it('sets PSM to true', function(){
+      thermostat.togglePSM();
+      thermostat.togglePSM();
+      expect(thermostat.isPowerSavingModeOn()).toEqual(true)
     })
   })
 
   describe('#turnPowerSaveModeOn', function(){
-    it('sets PSM to true', function(){
-      thermostat.turnPowerSaveModeOn();
-      expect(thermostat.isPowerSavingModeOn()).toEqual(true)
-    })
 
     it('if temperature is above 25, reduces to the maximum temperature', function(){
-      thermostat.turnPowerSaveModeOff();
+      thermostat.togglePSM();
       for(let i = 0; i<12; i++) {
         thermostat.up();
       }
       expect(thermostat.currentTemperature()).toEqual(32)
-      thermostat.turnPowerSaveModeOn();
+      thermostat.togglePSM();
       expect(thermostat.currentTemperature()).toEqual(25)
     })
   })
