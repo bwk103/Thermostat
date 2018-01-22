@@ -25,6 +25,13 @@
   grid-template-columns: repeat(4, 1fr);
 }
 
+#weather {
+  margin: auto;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start:3;
+}
+
 .low-usage {
   color: green;
 }
@@ -35,4 +42,11 @@
 
 .high-usage {
   color: red;
+}
+
+button {
+  margin: auto;
+  border-radius: 25%;
+  height: 50%;
+  width: 50%;
 }

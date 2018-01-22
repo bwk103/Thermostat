@@ -1,6 +1,7 @@
 
 $(document).ready(function(){
   thermostat = new Thermostat
+  getWeather('London')
   refreshTemp()
 
   $('#up').on('click', function(){
@@ -23,7 +24,25 @@ $(document).ready(function(){
     refreshTemp();
     $('#psmStatus').text(getPSMStatus())
   })
+
+  $('input').keypress(function(e){
+    if (e.which === 13) {
+      city = $(this).val();
+      getWeather(city);
+    }
+  })
 })
+
+getWeather = function(city){
+  var url = "http://api.openweathermap.org/data/2.5/weather?q=" + city;
+  var token = "&APPID=9a15d8212a9f29d9bc9c45b05c480823";
+  var units = "&units=metric";
+  $.getJSON((url + token + units), function(res) {
+    current_temperature = Math.round(parseInt(res.main.temp));
+    $('#city').text(city);
+    $('#weatherDescription').text(current_temperature)
+  })
+}
 
 refreshTemp = function(){
   $('h3').text(thermostat.currentTemperature())
@@ -31,11 +50,5 @@ refreshTemp = function(){
 }
 
 getPSMStatus = function(){
-  var status;
-  if (thermostat.isPowerSavingModeOn()){
-    status = 'On'
-  } else {
-    status = 'Off'
-  }
-  return status;
+ return thermostat.isPowerSavingModeOn() ? 'On' : 'Off'
 }
