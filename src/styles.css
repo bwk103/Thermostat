@@ -24,3 +24,15 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
+
+.low-usage {
+  color: green;
+}
+
+.medium-usage {
+  color: black;
+}
+
+.high-usage {
+  color: red;
+}

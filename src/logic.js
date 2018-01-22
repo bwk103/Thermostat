@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
   thermostat = new Thermostat
   refreshTemp()
@@ -26,6 +27,7 @@ $(document).ready(function(){
 
 refreshTemp = function(){
   $('h3').text(thermostat.currentTemperature())
+  $('h3').attr('class', thermostat.currentEnergyUsage())
 }
 
 getPSMStatus = function(){
