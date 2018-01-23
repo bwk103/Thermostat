@@ -1,52 +1,117 @@
-#outer_box {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  margin: auto;
-  width: 20%;
-  border: 1px solid black
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-#screen {
-  grid-column-start: 2;
-  grid-column-end: 4;
-  grid-row-start: 2;
-  grid-row-end: 3;
-  border: 1px solid grey;
-  text-align: center;
-}
+body {
+  font-family: 'Helvetica Neue'!important;
+  font-size: 50px;
+  font-weight: bold;
 
-#buttons {
-  grid-column-start: 1;
-  grid-column-end: 5;
-  grid-row-start: 4;
-  grid-row-end: 5;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-#weather {
-  margin: auto;
-  grid-column-start: 1;
-  grid-column-end: 5;
-  grid-row-start:3;
-}
-
-.low-usage {
-  color: green;
-}
-
-.medium-usage {
-  color: black;
-}
-
-.high-usage {
-  color: red;
 }
 
 button {
-  margin: auto;
-  border-radius: 25%;
-  height: 50%;
-  width: 50%;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: 1em;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.wrapper {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  grid-template-areas: "left right";
+  grid-template-columns: 3fr 2fr;
+  grid-column-gap: 20px;
+}
+
+.left {
+  grid-area: left;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 2fr 2fr 1fr 1fr 1fr 1fr;
+}
+
+.right {
+  grid-area: right;
+  background-color: black;
+  color: white;
+}
+
+.left h3 {
+  grid-area: 2 / 3 / 3 / 4;
+  font-size: 180px !important;
+  justify-self: end;
+}
+
+.left .buttons {
+  grid-area: 3 / 2 / 4 / 4;
+  align-self: center;
+  justify-self: end;
+}
+
+.left .buttons button {
+  margin-left: 15px;
+}
+
+.left .line {
+  color: white;
+  grid-area: 4 / 1 / 5 / 3;
+  background-color: rgb(223, 116, 58);
+}
+
+.left .psm-description {
+  color: white;
+  grid-area: 4 / 1 / 5 / 3;
+  align-self: center;
+  justify-self: center;
+  z-index: 2;
+}
+
+.left #psm-status {
+  grid-area: 4 / 3 / 5/ 4;
+  font-size: 100px !important;
+  justify-self: end;
+}
+
+.left #psm-toggle {
+  grid-area: 5 / 3 / 6 /4;
+  align-self: center;
+  justify-self: end;
+}
+
+.right {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 2fr 2fr 1fr 1fr 1fr 1fr;
+}
+
+.right .degrees {
+  grid-area: 1 / 1 / 6 / 2;
+  font-size: 200px;
+  align-self: center;
+  justify-self: start;
+  writing-mode:vertical-rl; /* vertical text */
+}
+
+.right #therm-icon {
+  grid-area: 1 / 2 / 5 / 3;
+  align-self: end;
+}
+
+.low-usage {
+  color: rgb(39, 184, 223);
+}
+
+.medium-usage {
+  color: rgb(61, 163, 49)!important;
+}
+
+.high-usage {
+  color: rgb(223, 116, 58);
 }

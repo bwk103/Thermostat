@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
   thermostat = new Thermostat
-  getWeather('London')
+  // getWeather('London')
   refreshTemp()
 
   $('#up').on('click', function(){
@@ -19,10 +19,10 @@ $(document).ready(function(){
     refreshTemp();
   })
 
-  $('#psm').on('click', function(){
+  $('#psm-toggle').on('click', function(){
     thermostat.togglePSM();
     refreshTemp();
-    $('#psmStatus').text(getPSMStatus())
+    $('#psm-status').text(getPSMStatus())
   })
 
   $('input').keypress(function(e){
@@ -46,9 +46,13 @@ getWeather = function(city){
 
 refreshTemp = function(){
   $('h3').text(thermostat.currentTemperature())
-  $('h3').attr('class', thermostat.currentEnergyUsage())
+  var status = thermostat.currentEnergyUsage()
+  $('#psm-status').attr('class', status);
+  $('h3').attr('class', status)
+  var color = $('h3').css('color');
+  $('.line').css('background-color', color);
 }
 
 getPSMStatus = function(){
- return thermostat.isPowerSavingModeOn() ? 'On' : 'Off'
+ return thermostat.isPowerSavingModeOn() ? 'on' : 'off'
 }
