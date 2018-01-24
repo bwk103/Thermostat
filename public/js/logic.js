@@ -1,17 +1,25 @@
 
 $(document).ready(function(){
   thermostat = new Thermostat
-  // getWeather('London')
-  refreshTemp()
+
+  $.getJSON('http://localhost:9292/temperature', function(data){
+    thermostat._temperature = parseInt(data.temperature);
+    console.log('The API is returning....' +data.psm)
+    thermostat._powerSavingMode = (data.psm === "true");
+    console.log(thermostat)
+    $('h3').text(thermostat.currentTemperature())
+    $('#psm-status').text(getPSMStatus())
+    addClasses();
+  })
 
   $('#up').on('click', function(){
     thermostat.up();
-    refreshTemp();
+    changeTemperature()
   })
 
   $('#down').on('click', function(){
     thermostat.down();
-    refreshTemp();
+    changeTemperature()
   })
 
   $('#reset').on('click', function(){
@@ -21,6 +29,7 @@ $(document).ready(function(){
 
   $('#psm-toggle').on('click', function(){
     thermostat.togglePSM();
+    changeTemperature()
     refreshTemp();
     $('#psm-status').text(getPSMStatus())
   })
@@ -44,8 +53,21 @@ getWeather = function(city){
   })
 }
 
+changeTemperature = function(){
+  var url = 'http://localhost:9292/temperature';
+  var data = {'temp': thermostat.currentTemperature().toString(),
+              'psm': thermostat._powerSavingMode};
+              console.log(data)
+  $.post(url, data);
+  refreshTemp();
+}
+
 refreshTemp = function(){
   $('h3').text(thermostat.currentTemperature())
+  addClasses();
+}
+
+addClasses = function(){
   var status = thermostat.currentEnergyUsage()
   $('#psm-status').attr('class', status);
   $('h3').attr('class', status)

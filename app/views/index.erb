@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>Thermostat</title>
-    <link rel="stylesheet" href="normalize.css">
-    <link rel="stylesheet" href="styles.css">
+    <link href="/css/normalize.css" rel="stylesheet" >
+    <link href="/css/styles.css" rel="stylesheet" >
   </head>
   <body>
     <div class="wrapper">
       <div class="left">
-        <h3 class="temperature"> </h3>
+        <h3 class="temperature"><%=@temperature%></h3>
         <div class="buttons">
           <button id="up" class="btn1">+</button>
           <button id="down" class="btn2">-</button>
@@ -27,9 +27,9 @@
         <p id="therm-icon"><span class="fas fa-thermometer-three-quarters fa-7x"></span></p>
       </div>
     </div>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
-    <script src="../lib/jquery-3.3.1.min.js"></script>
-    <script src="./Thermostat.js"></script>
-    <script src="./logic.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+    <script src="/js/lib/jquery-3.3.1.min.js"></script>
+    <script src="/js/Thermostat.js"></script>
+    <script src="/js/logic.js"></script>
   </body>
 </html>

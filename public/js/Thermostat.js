@@ -10,6 +10,9 @@ Thermostat.prototype.currentTemperature = function(){
 }
 
 Thermostat.prototype.up = function(){
+  if (!this.isPowerSavingModeOn()) {
+    this._maximumTemperature = 32;
+  }
   this._temperature += 1;
   if (this.currentTemperature() > this._maximumTemperature) {
     this._temperature = this._maximumTemperature
